@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="shortcut icon" type="image/x-icon" href="sandicon.png">
+		<title>뚱드위치</title>
+		<style>
+			body, h1, h2, p, ul{padding: 0; margin: 0;}
+
+		/*한글 폰트 부크크 고딕 700*/
+			@font-face {
+			    font-family: 'BookkGothic';
+			    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/BookkGothic-Bd.woff2') format('woff2');
+			    font-weight: 700;
+			    font-display: swap;
+			}
+				body{
+					font-family: 'BookkGothic';
+					font-weight: 700;
+				}
+		html {
+		    scroll-behavior: smooth;
+		    hyphens: none;
+		    word-break: keep-all;
+		    overflow-wrap: normal;
+		}
+		html {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+		/*section class*/
+			.section{
+				position: relative;
+				min-height: 100vh;
+			}
+			.section-01{
+				z-index: 1;
+			}
+			.section-02{}
+
+
+		/*div class*/
+			
+			.contents{
+				width: 100%;
+    			max-width: 1200px;
+				margin: auto;
+				position: relative;
+				padding: 200px 0px;
+			    box-sizing: border-box;
+			}
+
+			.contents-footer{
+				width: 100%;
+    			max-width: 1200px;
+				margin: auto;
+				padding: 200px 0px;
+				position: relative;
+			    padding: 200px 0px;
+			    box-sizing: border-box;
+			}
+
+			.sand-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}	
+		.sand-wrap img {
+    position: absolute;
+}
+
+.sand-bg {
+    width: 100%;
+    height: 100vh;
+    object-fit: contain;
+    z-index: 1;
+}
+
+
+.sand-text {
+    width: 100%;
+    height: 75vh;
+    object-fit: contain;
+    z-index: 2;
+    pointer-events: none;
+    top: 53%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+			.ab{
+				position: absolute;
+			}
+
+		/*Background*/
+			.bg-green{
+				background: #A2D959;
+			}
+			.bg-lightgreen{
+				background: #E4FFC1;
+			}
+			.bg-pink-01{
+				background: #FF60A1;
+			}
+			.bg-pink-02{
+				background: #FFB8D5;
+			}
+			.bg-pink-03{
+				background: #FF8BBA;
+			}
+			.bg-pink-04{
+				background: #FFE3EE;
+			}
+
+			.bg-sand-01{
+				background: url(sand-01.png) no-repeat center;
+				background-position: center;
+				background-attachment: fixed;
+				height: 95vh;
+			}
+
+		/*Text*/
+			.h1{
+				font-size: 5rem;
+			}
+			.h2{
+				font-size: 2.6rem;
+				line-height: 1.6;
+			}
+			.p{
+				font-size: 1.8rem;
+				line-height: 1.6;
+			}
+			/*Text Color*/
+				.text-pink{color: #FF60A1;}
+				.text-green{color: #1E3500;}
+				.text-orange{color: #FF6B3A;}
+				.text-white{color: white;}
+
+
+			/*Image*/
+	
+
+			/*정렬*/
+			/*.center{
+				text-align: center;
+				
+			}*/
+			.center{
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			.left{
+				text-align: left;
+			}
+			.right{
+				text-align: right;
+			}
+
+
+		/* ================================
+		   표지 호버 그룹
+		   ================================ */
+
+		/* 세 개를 묶는 wrapper */
+		.cover-hover-group {
+			position: absolute;
+			left: 40px;
+			top: 640px;
+			width: 400px;
+			height: 300px;
+			z-index: 10;
+		}
+
+		/* wrapper 안에 잇는 이미지 h2는 절대 위치 기준을 랩퍼로 */
+		.cover-hover-group img,
+		.cover-hover-group h2 {
+			position: absolute;
+			transition: all 0.4s ease;
+		}
+
+		/* top 이미지 - 기본 상태 */
+		.cover-top-img {
+			top: 0;
+			left: 0;
+			width: 350px;
+			z-index: 11;
+		}
+
+		/* bottom 이미지 - 기본 상태 */
+		.cover-bottom-img {
+			top: 150px;
+			left: 0;
+			width: 350px;
+			z-index: 11;
+		}
+
+		/* h2 텍스트 - 기본 상태 */
+		.cover-title {
+			top: 139px;
+			left: 22px;
+			right: 70px;
+			text-align: center;
+			font-size: 1.1rem;
+			line-height: 1.6;
+			white-space: normal;
+			z-index: 12;
+			color: black;
+		}
+
+		/* ---- 호버 상태일때 ---- */
+
+		/* wrapper에 마우스 올리면 top 이미지는 위로 올라가고 작아짐 */
+		.cover-hover-group:hover .cover-top-img {
+			top: -40px;
+			left: 30px;
+			width: 280px;
+		}
+
+		/* bottom 이미지는 살짝 내려가고 작아짐 */
+		.cover-hover-group:hover .cover-bottom-img {
+			top: 210px;
+			left: 30px;
+			width: 280px;
+		}
+
+		/* h2는 글자 커지고, 행간 좁아짐 → "두꺼워지는" 느낌 */
+		.cover-hover-group:hover .cover-title {
+			font-size: 2.7rem;
+			line-height: 1.0;
+			top: 88px;
+			color: #FF60A1;;
+		}
+
+
+		/* ================================
+		   네비게이션
+		   ================================ */
+
+		nav {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			z-index: 300;
+			background: transparent;
+		}
+
+		.nav-inner {
+			width: calc(100% - 3cm);
+			margin: 0 auto;
+			padding-top: 0.9cm;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		/* 맨 왼쪽 로고 이미지 */
+		.nav-logo {
+			width: 70px;
+			height: auto;
+		}
+
+		/* 텍스트 메뉴 4개를 묶는 영역 */
+		.nav-menu {
+			display: flex;
+			gap: 0;
+			flex: 1;
+			justify-content: space-evenly;  /* 4개 메뉴 간격 균등 */
+			padding-left: 20px;
+		}
+
+		/* 각 메뉴 항목 */
+		.nav-menu a {
+			font-family: 'BookkGothic';
+			font-weight: 700;
+			font-size: 1.3rem;
+			color: #1E3500;
+			text-decoration: none; 
+			display: inline-block;  
+			transition: color 0.2s ease, transform 0.2s ease;
+		}
+
+		/* 메뉴 허버*/
+		.nav-menu a:hover {
+			color: white;
+			transform: rotate(-5deg);
+		}
+
+/* ================================
+   샌드 카드 호버
+   ================================ */
+.sand-card {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.sand-card img {
+    display: block;
+    width: 300px;
+    transition: transform 0.3s ease;
+}
+
+.sand-card:hover img {
+    transform: rotate(0deg) scale(1.05) !important;
+}
+
+.sand-card-label {
+    position: absolute;
+    bottom: 480px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #A2D959;
+    padding: 14px 24px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.sand-card:hover .sand-card-label {
+    opacity: 1;
+}
+
+
+ @keyframes fade-up {
+        from { opacity: 0; transform: translateY(60px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .sand-label-1 { animation: fade-up linear both; animation-timeline: scroll(); animation-range: 0vh 15vh; }
+    .sand-label-2 { animation: fade-up linear both; animation-timeline: scroll(); animation-range: 10vh 25vh; }
+    .sand-label-3 { animation: fade-up linear both; animation-timeline: scroll(); animation-range: 20vh 35vh; }
+    .sand-label-4 { animation: fade-up linear both; animation-timeline: scroll(); animation-range: 30vh 45vh; }
+    .sand-label-5 { animation: fade-up linear both; animation-timeline: scroll(); animation-range: 40vh 55vh; }
+
+/* ================================
+   베이글 호버
+   ================================ */
+
+.bagle-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* 래퍼는 마우스 이벤트 완전히 차단 */
+}
+
+/* 베이글 이미지 : 화면 왼쪽으로 절반 숨김 */
+.bagle-img {
+    position: fixed;
+    width: 500px;
+    top: 50%;
+    left: -250px; /* 이미지 절반만큼 왼쪽으로 */
+    transform: translateY(-50%);
+    transition: width 0.3s ease, left 0.3s ease;
+    z-index: 69;
+    cursor: pointer;
+    pointer-events: auto; /* 이미지에만 마우스 이벤트 허용 */
+      mix-blend-mode: screen;
+}
+
+/* 호버 : 왼쪽 끝에서 크게 펼쳐짐 */
+.bagle-img:hover {
+    width: 1300px;
+    left: 0;
+    mix-blend-mode: normal;
+}
+
+/* 데코 이미지들 */
+.bagle-deco {
+    position: absolute;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+/* 베이글 호버 시 데코 숨김 */
+.bagle-img:hover ~ .bagle-deco {
+    opacity: 0;
+}
+
+/* 텍스트 박스 */
+.bagle-textbox {
+    position: absolute;
+    left: 110px;
+    top: 480px;
+    width: 1100px;
+    transition: left 0.3s ease, top 0.3s ease, width 0.3s ease;
+    pointer-events: none;
+    font-size: 1.9rem;
+    line-height: 1.6;
+}
+
+/* 베이글 호버 시 텍스트 이동 */
+.bagle-img:hover ~ .bagle-textbox {
+    left: 1010px;
+    top: 300px;
+    width: 400px;
+        font-size: 2.4rem;
+    line-height: 1.6;
+}
+
+@keyframes blink {
+    0%, 49%  { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+
+.blink {
+    animation: blink 1s ease-in-out infinite;
+}
+
+/* ================================
+   먹방 팝업
+   ================================ */
+.mukbang-trigger {
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+}
+
+.mukbang-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 473px;
+    z-index: 9998;
+    box-shadow: 10px 20px 30px rgba(0,0,0,0.2);
+}
+
+.mukbang-popup.active {
+    display: block;
+}
+
+.mukbang-popup iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.mukbang-close {
+    position: absolute;
+    top: -44px;
+    right: 0;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    font-family: 'BookkGothic';
+}
+
+/* 핑크3 배경 고정 — overflow:hidden 제거해야 fixed 작동 */
+#04 {
+    overflow: visible;
+}
+
+		</style>
+	</head>
+
+	<body>
+	<!-- 네비게이션 -->
+		<nav>
+			<div class="nav-inner">
+
+				<!-- 왼쪽 로고 이미지. src= 뒤에 실제 이미지 파일명 넣기 -->
+				<a href="#home"><img src="logo.png" class="nav-logo" alt="로고"></a>
+
+				<!-- 텍스트 메뉴 4개. 각 >글자 부분< 을 원하는 이름으로 바꾸면 됨 -->
+				<div class="nav-menu">
+					<a href="#01">태초의 샌드</a>
+
+					<a href="#03">이만큼만 더?</a>
+					<a href="#04">아직 부족해...</a>
+					<a href="#05">더 많이!</a>
+				</div>
+
+			</div>
+		</nav>
+
+	<!--표지 -->
+		<section id="home" class="bg-lightgreen" style="width: 100%; position: fixed; inset: 0; z-index: 4; height: 100vh; top: 0;">
+		<div class="sand-wrap" style="position: relative;">
+				
+				<!-- 호버 그룹: 이 div 위에 마우스 올리면 세 개가 같이 반응함 -->
+				<div class="cover-hover-group">
+					<img src="top-03.png" class="cover-top-img" alt="top">
+					<h2 class="cover-title">점점 뚱뚱해지는 샌드위치에 관한 이야기</h2>
+					<img src="bottom-03.png" class="cover-bottom-img" alt="bottom">
+				</div>
+
+
+				<img src="sand-01.png" class="sand-bg" style="mix-blend-mode: hard-light;">
+				<img src="sand-01-text.png" class="sand-text">
+			</div>
+		</section>
+<!-- 도입 -->
+<header>
+		<section class="section bg-lightgreen" style="margin-top: 100vh; z-index: 10;">
+		
+			<div class="contents text-pink" style="height: 200vh;">
+
+					<img src="ahahah.png" class="ab blink" style="width: 400px; left: 250px; top: 50px;">
+
+					<img src="woman-01.png" class="ab" style="width: 700px; left: -200px; ">
+
+					<h1 class="ab h1" style="left: 520px; top: 390px; ">당신의</h1>
+
+					<h1 class="ab h1" style="left: 400px; top: 600px;transform: rotate(-20deg);">턱관절은</h1>
+
+					<h1 class="ab h1" style="left: 690px; top: 720px;">안녕하신가요?</h1>
+
+					<img src="woman-02.png" class="ab" style="width: 520px; left: 750px; top: 1250px;">
+
+					<h2 class="h2 text-green" style="padding-right: 30px; padding-top: 1100px;"> 인간의 평균 개구량,<br>즉 입을 벌릴 수 있는 크기는</h2>
+
+					<h2 class="h2 text-pink" style="padding-left: 259px; padding-top: 160px;"> 4.5cm</h2>
+
+					<img src="circle.png" class="blink ab" style="top: 1563px; left: 948px; mix-blend-mode: overlay;" >
+					<img src="circle.png" class="ab" style="top: 1563px; left: 90px; ">
+			</div>
+
+
+				<div class="contents" style="top: 48px; padding-top:0; z-index: 11;">
+					<h2 class="ab h2 text-green center" 
+					style="left:0px; top: -40px;">하지만 요즘 샌드들은...<br>평균 두께 <span class="text-pink">8cm</span>를 훌쩍 넘는 것들도 존재한다.</h2>
+					<p class="ab p text-green center" style="padding-top: 50px; left:0px; top: 60px;">이렇게 생긴 뚱뚱한 샌드위치는 우리에게 이미 익숙해진 존재이기도 하다.</p>
+				</div>	
+
+		</section>
+</header>
+
+		<section class="section bg-lightgreen" style="z-index: 10;">
+
+			<div class="contents">
+
+				<div style="position: relative; ">
+					
+					<img src="sand-04.png" class="ab" style="top:200px; left:30px; width:800px;">
+					<img src="circle.png" class="blink ab" style=" width: 200px; top:300px; left: 780px;">
+					<img src="circle.png" class="blink ab" style=" width: 200px; top:498px; left: 780px;">	
+					<img src="circle.png" class="blink ab" style=" width: 200px; top:696px; left: 780px;">				
+				</div>
+				
+
+				<div style="position: relative;">
+					<img src="man01.png" class="ab" style="top:px; left: -250px; width: 400px;">
+					<p class="text-orange p left ab" style="left:130px; bottom: -190px;">"이건... 샌드가 아니라..."</p>
+					<h2 class="text-orange h2 left ab" style="left: 650px; bottom:-1000px; transform: rotate(-30deg);">WOW</p>
+				</div>
+
+				<div style="position: relative; height: 100vh;">
+					<img src="man02.png" class="ab" style="top:500px; left: 800px;width: 550px;">
+					<p class="ab text-orange p right" style="padding-left: 28px; top:490px; left: 930px;">"하마가 될 수 있는 새로운 도구!?"</p>
+				</div>
+			</div>
+			
+			<div class="contents text-green">
+				<h1 style="padding-bottom: 100px;">그렇다면...</h1>
+				<img src="sand-03.png" class="center" style="width: 900px;">
+				<h1 style="padding-top:100px;">우선 샌드위치의 시초부터 알아보자.</h1>
+			</div>	
+
+
+
+		</section>
+
+
+
+<!-- 도입 -->
+
+		<section id="01" class="section bg-pink-04" style="z-index: 15;">
+
+			<div class="contents">
+
+				<h1 class="h1 text-pink center">
+					18세기 영국의 어느 날... 샌드위치는 탄생했다.
+				
+				</h1>
+				<div style="position:relative; width:100vw; left:50%; transform:translateX(-50%); overflow:hidden; height:500px;">
+				    <img src="sand-06.png" class="ab"
+				    style="width:800px; right:0; top:-40px;">
+				</div>
+
+				<p class="ab p text-green center"
+				style="top: 630px;
+				left: 10px;
+				padding-right: 440px;">
+
+				<img src="r1.png" class="ab" style="width: 170px; top: 170px; left: 1050px; mix-blend-mode: hard-light;">
+		        <img src="r2.png" class="ab" style="width: 300px;top: -140px; left: 1080px; mix-blend-mode: hard-light;">
+
+					지금과는 조금 달랐다.<br>18세기 영국에서 탄생한 샌드위치는 빠르게 식사를 해결하기 위한 음식이었다.
+				18세기 영국, 한 백작이 카드놀이를 하다가 식사 시간을 아끼기 위해 빵과 빵 사이에 고기를 끼워 먹기 시작했다.
+            그것이 바로 샌드위치의 시작이었다.
+				</p>
+
+        <img src="sandwichman.png"
+        class="center"
+        style="width:100%; padding-top:230px; padding-left: 0;object-fit:cover; display:block;">
+        <img src="r6.png" class="ab" style="width: 500px; top: 1119px; left: -150px; mix-blend-mode: color-burn;">
+        <img src="r7.png" class="ab" style="width: 500px; top: 1536px; left: 950px; mix-blend-mode: color-burn;">
+
+        <p class="p text-green center"
+        style="padding-top:120px;">
+            
+        </p>
+
+
+<div style="position: relative; padding-bottom: 100px;">
+
+    <p class="ab p text-white"
+    style="display:table; margin:0 auto; background:#A2D959; padding:20px 30px;
+    left: -50px; top: -298px;">
+        한 손으로 먹을 수 있었고,
+    </p>
+
+    <p class="ab p text-white"
+    style="display:table; margin:20px auto 0; background:#A2D959; padding:20px 30px;
+    left: 150px; top: -220px;">
+        자리를 비우지 않고 먹을 수 있었고,
+    </p>
+
+    <p class="ab p text-white"
+    style="display:table; margin:20px auto 0; background:#A2D959; padding:20px 30px;
+    left: 650px; top: -130px; right: 315px;">
+        빵이 손을 더럽히지 않게 막아주었으며,
+    </p>
+
+    <p class="ab p text-white"
+    style="display:table; margin:20px auto 0; background:#A2D959; padding:20px 30px;
+    left: 840px; top: 50px; right: -229px;">
+        무엇보다도 빠르게 먹을 수 있었다.
+    </p>
+
+</div>
+        <p class="p text-pink center"
+        style="padding-top:140px;">
+            그리고 이 간편한 음식은 바다를 건너 우리나라에도 도착하게 되었다.
+        </p>
+
+
+			</div>
+
+		</section>
+<!-- 핑크1 -->
+		<section id="03" class="section bg-lightgreen" style="z-index: 20;">
+
+<div id="sand-scroll-section" class="bg-lightgreen" style="position:relative; height:700vh;">
+
+
+    <div style="position:sticky; top:0; width:100%; height:100vh; overflow:hidden;">
+        <img src="sand-05.png"
+        style="width:100%; height:100%; object-fit:cover; display:block;">
+        <img src="r1.png" class="ab" style="width: 500px; top: 199px; left: 1050px; mix-blend-mode: hard-light;">
+        <img src="r2.png" class="ab" style="width: 650px;top: 450px; left: 150px; mix-blend-mode: hard-light;">
+
+        <div id="sand-labels" style="position:absolute; top:54%; left:50%; transform:translate(-50%, -50%); text-align:center;">
+
+            <p class="p text-white sand-label"
+            style="display:table; margin:0 auto; background:#A2D959; padding:40px 30px; opacity:0; transform:translateY(60px); transition: opacity 0.5s ease, transform 0.5s ease;">
+                빵
+            </p>
+            <p class="p text-white sand-label"
+            style="display:table; margin:20px auto 0; background:#A2D959; padding:40px 30px; opacity:0; transform:translateY(60px); transition: opacity 0.5s ease, transform 0.5s ease;">
+                계란
+            </p>
+            <p class="p text-white sand-label"
+            style="display:table; margin:20px auto 0; background:#A2D959; padding:40px 30px; opacity:0; transform:translateY(60px); transition: opacity 0.5s ease, transform 0.5s ease;">
+                햄
+            </p>
+            <p class="p text-white sand-label"
+            style="display:table; margin:20px auto 0; background:#A2D959; padding:40px 30px; opacity:0; transform:translateY(60px); transition: opacity 0.5s ease, transform 0.5s ease;">
+                야채
+            </p>
+            <p class="p text-white sand-label"
+            style="display:table; margin:20px auto 0; background:#A2D959; padding:40px 30px; opacity:0; transform:translateY(60px); transition: opacity 0.5s ease, transform 0.5s ease;">
+                빵
+            </p>
+
+        </div>
+    </div>
+
+    <div style="position:relative; z-index:70; background:#FFE3EE;">
+        <div class="contents">
+            <h2 class="h2 text-green center">
+                한국에는 길거리 토스트가 있었다.
+            </h2>
+            <p class="p text-pink center"
+            style="padding-top:120px; padding-right: 150px;">
+                길거리 토스트는 네모난 식빵 두 장, 그 사이엔 계란, 양배추, 햄, 그리고 설탕 한 줌으로 사람들의 허기를 채워 주었다. 케첩과 설탕이 더해진 손가락 두세 마디 정도 높이의 투박한 단면은 한 손으로 쥐고 한 입에 베어 물기 딱 좋은 두께였다.<br>여전히 가성비 있고 간단한 것이 샌드의 전부였던 시절이었다.
+            </p>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="section" style="z-index: 70; background:none; min-height:0;">
+    <div style="position:relative; z-index:40;" class="bg-lightgreen">
+        <div class="contents">
+            <h2 class="h2 text-green center">
+                이게 전부였지만... 시간이 흐르고,<br>샌드는 조금씩... 두꺼워지기 시작했다.
+            </h2>
+        </div>
+    </div>
+</section>
+<!-- 핑크2 -->
+<section id="04" class="section" style="z-index:71; min-height:120vh; position:relative; overflow:hidden; background: #FF8BBA url('fruits.png') no-repeat center center / cover; background-attachment:fixed;">
+
+    <div style="position:relative; width:1200px; margin:auto; padding:200px 0px; min-height:100vh;">
+
+        <h2 class="h2 text-white ab"
+        style="top:150px; left:-150px; right: 840px; background:#FF8BBA; padding:30px 50px; line-height:1.6;border: 4px solid white;">
+            이제는 맛 뿐만 아니라 보여지는 모습도 필수 요소가 되었다.
+        </h2>
+
+        <p class="p text-white ab"
+        style="top:350px; left:230px; right: 486px;background:#FF8BBA; padding:24px 36px; line-height:1.8; border: 4px solid white;">
+            SNS가 일상이 된 시대에, 음식은 먹기 전에 먼저 사진이 된다.
+        </p>
+
+        <p class="p ab"
+        style="top:720px; left:-100px; background:white; color:#FF60A1; padding:24px 36px; line-height:1.8;">
+            사진을 올리기 좋은 음식,
+        </p>
+
+        <p class="p ab"
+        style="top:856px; left:-100px; background:white; color:#FF60A1; padding:24px 36px; line-height:1.8;">
+            잘라봤을 때 예쁜 음식,
+        </p>
+
+        <p class="p ab"
+        style="top:990px; left:-100px; background:white; color:#FF60A1; padding:24px 36px; line-height:1.8;">
+            단면이 화려한 음식
+        </p>
+
+        <p class="p text-white ab"
+        style="top:1123px; left:-100px; right: 436px; background:#FF8BBA; padding:24px 36px; line-height:1.8; border: 4px solid white;">
+            이러한 것들이 유명세를 타면서, 두꺼운 샌드는 반짝하고 사라지는 순간 유행이 아니라 거대한 흐름으로 자리잡게 되었다.
+        </p>
+
+        <p class="p text-white ab"
+        style="top:460px; left:650px; right: -177px; background:#FF8BBA; padding:24px 36px; line-height:1.8; border: 4px solid white;">
+            일본에서 시작된 후르츠 산도는 그 변화를 가장 잘 보여준다.
+            꽉 찬 생크림 사이에 과일이 정렬된 이 샌드는 
+            편하게 먹을 수 있느냐보다 한 면의 생김새가 더 중요해졌다는 걸 보여준다.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- 핑크4 -->
+<section id="05" class="section bg-pink-01" style="z-index: 68; overflow: hidden;">
+
+    <div class="contents" style="height:1100px;">
+
+        <h1 class="h2 text-white ab center"
+        style="top:120px; line-height:1.5;">
+            이 이후로도, 샌드는 새로운 취향을 반영해 진화하고 있다.
+        </h1>
+
+        <img src="o.png" class="ab blink" style="width:300px; top: 280px;left: 50px;">
+
+        <div class="bagle-wrap">
+
+            <img src="bagle.png" class="bagle-img">
+
+            <img src="mask.png" class="bagle-deco"
+            style="width:310px; top:279px; left:-291px; mix-blend-mode:screen;">
+
+            <img src="r4.png" class="bagle-deco"
+            style="width:150px; top:274px; left:-146px; mix-blend-mode:screen;">
+
+            <img src="r9.png" class="bagle-deco"
+            style="width:150px; top:661px; left:-201px; mix-blend-mode:screen;">
+
+            <div class="bagle-textbox">
+                <p class=" text-white">
+                    가장 최근의 진화 형태는 샌드 베이글이다. 과일 산도의 업그레이드 버전이라고 할 수 있다. 두꺼운 베이글을 가르면 크림과 화려한 단면을 위한 재료들이 잔뜩 박혀 있다.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+		
+<!-- 결론? -->
+<section id="conclusion" class="section bg-lightgreen" style="z-index: 80;">
+			<div class="contents">
+				<div style="text-align:center; padding-bottom: 100px;">
+				    <img src="a3.png" style="width:500px; display:block; margin:0 auto;">
+				    <p class="p text-green" style="margin:0; padding:0;">
+				        샌드의 변화는 단순한 음식 트렌드를 넘어서<br>
+				        그 안에 시대의 취향이 고스란히 담겨 있다.
+				    </p>
+				    <img src="a2.png" style="width:500px; display:block; margin:0 auto;">
+				    <p class="p text-green" style="margin:0; padding:0;">
+				        <span class="text-pink blink">편리함</span>을 원했던 시작부터,<br>
+				        <span class="text-pink blink">가성비</span>있는 배부름을 원했던 시기를 지나고<br>
+				        <span class="text-pink blink"> 예쁜 단면</span>을 원하는 지금에 이르기까지...
+				    </p>
+				    <img src="a1.png" style="width:500px; display:block; margin:0 auto; padding-bottom: 100px;">
+				</div>
+
+				<h2 class="h2 text-green"
+				style="display:table; margin:20px auto 0; background:#FFE3EE; padding:30px 30px;  text-align: center;">
+				어느 시대와 유행이 궁금하다면,<br>
+				앞으로도 바뀌어 갈 <span class="text-pink">빵과 빵 사이</span>를 살펴보자.
+				</h2>
+
+			</div>
+
+		</section>
+	<!-- 폼폼푸터 -->
+		<section class="bg-lightgreen" style="z-index:999; padding:0; width: 100%; padding-top:50px;position: relative;">
+			<footer>
+				<div> 
+					<img src="top-02.png" style="width:100%; mix-blend-mode: darken;">
+
+					<div class="text-pink center" style="width:100%; padding-top: 0; margin: 0;">
+					<h2 style=" text-align: center; font-size:6.8rem; line-height: 0.9; ">이거 어디까지 두꺼워지는 거예요?</h2>
+					<h2 style="font-size:2rem; line-height: 1; text-align: center;">2026년도 1학기 서울과학기술대학교 웹퍼블리싱</h2>
+					<h2 style="font-size:2rem; line-height: 1; text-align: center;">rlatlgus@seoultech.ac.kr</h2>
+					<h2 style="font-size:2rem; line-height: 1; text-align: center;">2026&copy;김시현. 모든 권리 보유.</h2>
+					</div>
+					
+					<img src="bottom-02.png" style="width:100%; mix-blend-mode: darken;">
+				</div>
+			</footer>
+			
+		</section>
+<script>
+    const section = document.getElementById('sand-scroll-section');
+    const labels = document.querySelectorAll('.sand-label');
+    const totalLabels = labels.length;
+
+    if (section && totalLabels > 0) {
+        window.addEventListener('scroll', () => {
+            const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+            const sectionHeight = section.offsetHeight;
+            const scrolled = window.scrollY - sectionTop;
+            const activeRange = sectionHeight - window.innerHeight;
+            const step = activeRange / (totalLabels + 1);
+
+            labels.forEach((label, i) => {
+                const trigger = step * (i + 1);
+                if (scrolled >= trigger) {
+                    label.style.opacity = '1';
+                    label.style.transform = 'translateY(0)';
+                } else {
+                    label.style.opacity = '0';
+                    label.style.transform = 'translateY(60px)';
+                }
+            });
+        });
+    }
+
+    // 베이글 이미지 핑크4 섹션에서만 보이기
+    const section04 = document.getElementById('04');
+const conclusion = document.getElementById('conclusion');
+const bagleImg = document.querySelector('.bagle-img');
+
+window.addEventListener('scroll', () => {
+    const top = section04.getBoundingClientRect().top;
+    const bottom = conclusion.getBoundingClientRect().bottom;
+
+    if (top < window.innerHeight && bottom > 0) {
+        bagleImg.style.opacity = '1';
+        bagleImg.style.pointerEvents = 'auto';
+    } else {
+        bagleImg.style.opacity = '0';
+        bagleImg.style.pointerEvents = 'none';
+    }
+});
+
+// 먹방 팝업
+const mukbangTrigger = document.getElementById('mukbang-trigger');
+const mukbangPopup = document.getElementById('mukbang-popup');
+const mukbangClose = document.getElementById('mukbang-close');
+
+mukbangTrigger.addEventListener('click', () => {
+    mukbangPopup.classList.add('active');
+});
+
+mukbangClose.addEventListener('click', () => {
+    mukbangPopup.classList.remove('active');
+    // iframe src 초기화로 영상 정지
+    const iframe = mukbangPopup.querySelector('iframe');
+    iframe.src = iframe.src;
+});
+</script>
+</script>
+	</body>
+</html>
